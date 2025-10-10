@@ -8,13 +8,12 @@ from dotenv import load_dotenv
 load_dotenv()
 import os
 
-
 #if choice1 == 1:
 client = Groq(
 api_key=os.environ.get("GROQ_API_KEY"),
 )
 # Title of the app
-st.title("LegitMate.ai–Legal assistance 24/7💎")
+st.title("LegitMate.ai–Legal assistance 24/7")
 
 # Write text
 st.write("Welcome to your Legal Matrimonial Assistant app!")
@@ -46,21 +45,21 @@ if "messages" not in st.session_state:
         }
     ]
 
-with st.sidebar:
-    st.header("💬 Enter/Upload Your Code/File")
-    with st.form("chat_form", clear_on_submit=True):
-        #user_input = st.text_input("Hi, How can I help you today ?", key="input_box")
-        choice1 = st.radio(
-            "Enter your Language choice:",
-            (1, 2),
-            format_func=lambda x: "Hindi" if x == 1 else "English"
-        )        
-        user_input=st.text_area("Hi, How can I help you today ?", height=50)
-        uploaded_file = st.file_uploader(
-        "Attach a supporting file (optional)", 
-        type=["txt", "docx", "pdf"])  # Restrict to text files only
-        
-        submitted = st.form_submit_button("Submit")
+#with st.sidebar:
+#st.header("💬 Enter/Upload Your Code/File")
+with st.form("chat_form", clear_on_submit=True):
+    #user_input = st.text_input("Hi, How can I help you today ?", key="input_box")
+    choice1 = st.radio(
+        "Enter your Language choice:",
+        (1, 2),
+        format_func=lambda x: "Hindi" if x == 1 else "English"
+    )        
+    user_input=st.text_area("Hi, How can I help you today ?", height=50)
+    #uploaded_file = st.file_uploader(
+    #"Attach a supporting file (optional)", 
+    #type=["txt", "docx", "pdf"])  # Restrict to text files only
+    
+    submitted = st.form_submit_button("Submit")
     
     #user_input=st.text_input("Hi, How can I help you today ?")
     #Submit button to control execution
@@ -70,28 +69,28 @@ with st.sidebar:
         else:
             st.success("✅ Processing your request...")
             #st.write("Text entered:", text_val)    
-            if uploaded_file:
-                st.write("File uploaded:", uploaded_file.name)
-            else:
-                st.info("No file uploaded (that’s okay!)")
+            #if uploaded_file:
+            #    st.write("File uploaded:", uploaded_file.name)
+            #else:
+            #    st.info("No file uploaded (that’s okay!)")
                 
 #text_data=""    
-if uploaded_file is not None:
-    file_type = uploaded_file.name.split(".")[-1].lower()
-    content = ""
-    contentTbl=""
+#if uploaded_file is not None:
+#    file_type = uploaded_file.name.split(".")[-1].lower()
+#    content = ""
+#    contentTbl=""
     #st.write(file_type)
-    if file_type == "txt":
+#    if file_type == "txt":
         # Read as text
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        content = stringio.read()
-        text_data=content
-        #st.write(text_data)
-    else:
-        st.error("⚠️ Unsupported file type. Please upload a .py file.")
-        text_data=""
-else:
-    text_data=""
+#       stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+#        content = stringio.read()
+#        text_data=content
+#        #st.write(text_data)
+#    else:
+#        st.error("⚠️ Unsupported file type. Please upload a .py file.")
+#        text_data=""
+#else:
+text_data=""
 
 messages = st.session_state.messages
 if choice1==1:
@@ -119,9 +118,3 @@ if submitted:
         except Exception as e:
             st.markdown(f"⚠️ API Error. Please check your API key and try again.{e}")
             st.markdown("An unexpected error occurred!")
-
-
-
-
-
-
