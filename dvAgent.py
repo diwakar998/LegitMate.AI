@@ -109,6 +109,19 @@ if submitted:
         response=chat_completion.choices[0].message.content
         st.markdown(response)
     except:
-        st.markdown("An unexpected error occurred!")
+        try:
+            chat_completion = client.chat.completions.create(
+                messages=messages,
+                model="groq/compound"
+            )
+            response=chat_completion.choices[0].message.content
+            st.markdown(response)
+        except Exception as e:
+            st.markdown(f"⚠️ API Error. Please check your API key and try again.{e}")
+            st.markdown("An unexpected error occurred!")
+
+
+
+
 
 
