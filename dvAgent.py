@@ -100,13 +100,15 @@ else:
     messages.append({"role":"user", "content": user_input+text_data+"Please reply in English language."}) 
 
 #messages.append({"role":"user", "content": user_input+text_data})
-chat_completion = client.chat.completions.create(
-        messages=messages,
-        model="llama-3.3-70b-versatile"
-    )
-
-
-response=chat_completion.choices[0].message.content
-st.markdown(response)
+if submitted:
+    try:
+        chat_completion = client.chat.completions.create(
+                messages=messages,
+                model="llama-3.3-70b-versatile"
+            )  
+        response=chat_completion.choices[0].message.content
+        st.markdown(response)
+    except:
+        st.markdown("An unexpected error occurred!")
 
 
